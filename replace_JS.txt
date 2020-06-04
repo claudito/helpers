@@ -1,0 +1,5 @@
+var url = '{{ route("admin.stocks.edit", ":id") }}';
+url = url.replace(':id', stock.id);
+$('.stocks_list').append('<li><a href="'+url+'">' + stock.symbol + ' </a></li>');
+
+https://stackoverflow.com/questions/27634285/laravel-4-pass-a-variable-to-route-in-javascript
