@@ -14,11 +14,11 @@
           'name' =>  'tallerlaravel7notificaciones@gmail.com'
 
       ],
-      'email_reply' => 'tallerlaravel7notificaciones@gmail.com'
+      'email_reply' => 'tallerlaravel7notificaciones@gmail.com',
       'email_cc'    => 'tallerlaravel7notificaciones@gmail.com'
     
   ];
 
-\Config::set('mail', $config ) );
+\Config::set('mail', $config  );
 Mail::to( $value->correo  )->send( new EnviarCertificadoCorreo( $value ) );
 
