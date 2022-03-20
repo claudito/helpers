@@ -10,5 +10,11 @@ deferRender:true,
 iDisplayLength: 25,
 bProcessing: true,
 
+ //Ocultar Controles
+ paging:   false,
+ ordering: false,
+ info:     false
+ searching:false,
+
 //ToolTip Datatable
 $('body').tooltip({selector: '[data-toggle="tooltip"]'});
