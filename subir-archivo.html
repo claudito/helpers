@@ -1,0 +1,23 @@
+<script>
+$(document).on('submit','#formulario',function(e){
+
+    var parametros = new FormData(this),
+
+    $.ajax({
+      url:"{{ route('tu_ruta') }",
+      type:"POST",
+      data: parametros,
+      contentType: false,
+      cache: false,
+      processData:false,
+      beforeSend:function(){
+
+      },
+      success:function(data){
+
+      }
+    });
+
+  e.preventDefault();
+});
+</script>
