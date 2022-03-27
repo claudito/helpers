@@ -1,7 +1,7 @@
 <script>
 $(document).on('submit','#formulario',function(e){
 
-    var parametros = new FormData(this),
+    var parametros = new FormData(this);
 
     $.ajax({
       url:"{{ route('tu_ruta') }",
