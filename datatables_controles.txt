@@ -1,7 +1,5 @@
-"language":{
-
- "url":"{{  asset('js/spanish.json') }}"
-
+language:{
+ url:"{{  asset('js/spanish.json') }}"
 },
 order:[[0,'asc']],
 destroy:true,
