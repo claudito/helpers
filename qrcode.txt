@@ -1,0 +1,6 @@
+https://www.simplesoftware.io/#/docs/simple-qrcode/es
+
+$text = "texto de prueba";
+$file = QrCode::format('png')->size(300)->margin(0)->generate($text);
+
+ Storage::put('qr.png', $file, 'public');
