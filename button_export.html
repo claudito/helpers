@@ -1,0 +1,39 @@
+  <button class="btn-export">
+    Exportar
+  </button>
+
+
+  <script>
+     $('#consulta').DataTable({
+        buttons: [
+                {
+                    extend: 'excel',
+                    title : 'Titulo de Documento Excel',
+                    exportOptions: {
+                        columns: ':not(.notexport)'
+                    }
+                }
+        ]
+     });
+
+      //Exportar
+      $(document).on('click','.btn-export',function(e){
+
+          Swal.fire({
+              title:'Generando Archivo',
+              text:'Espere un momento...',
+              imageUrl:'{{ asset('img/loader.gif') }}',
+              timer:2000,
+              showConfirmButton:false,
+              allowOutsideClick:false
+          });
+
+          var table = $('#consulta').DataTable();
+              setTimeout( function () {
+                 table.button( '.buttons-excel' ).trigger();
+              }, 1000 );
+
+          e.preventDefault();
+      });
+
+  </script>
