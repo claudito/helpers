@@ -16,6 +16,9 @@ $(document).on('submit','#formulario',function(e){
       },
       success:function(data){
 
+      },
+      error:function(xhr,status,error){
+        alert('ERROR: '+error);
       }
     });
 
