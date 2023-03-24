@@ -1,1 +1,53 @@
 
+        <label style="color: blue" >RECEPTOR(Búsqueda Nro Doc Identidad, Apellidos o Nombres)</label>
+        <select id='searchReceptor' name="revisor" lang="es">
+         <option value='0'>Seleccionar</option>
+        </select>
+
+  //Searh Nivel 1
+   $("#searchReceptor").select2({
+    width:'100%',
+    dropdownParent: $('#modal-actualizar-revisores-1'),
+    minimumInputLength: 2,
+    ajax: {
+     url:'{{ route('grupos.get_tipo_revisores') }}',
+     type: "get",
+     dataType: 'json',
+     delay: 250,
+     data: function (params) {
+      return {
+        nivel : 4,
+        country_id :country,
+        searchTerm: params.term // search term
+      };
+     },
+     processResults: function (response) {
+       return {
+          results: response
+       };
+     },
+     cache: true
+    }
+   });
+
+      $search = $request->searchTerm;
+      if (strlen(trim($search)) > 0) {
+          $result  = DB::table('workflow_trabajador')->select(DB::raw("
+      TRAB_NUM_DOC_IDEN  id,
+      CONCAT(
+      IFNULL(CAST(TRAB_NUM_DOC_IDEN AS CHAR),''),' - ',
+      IFNULL(TRAB_PRIMER_NOMBRE,''),' ',
+      IFNULL(TRAB_SEGUNDO_NOMBRE,''),' ',
+      IFNULL(TRAB_APELLIDO_PATERNO,''),' ',
+      IFNULL(TRAB_APELLIDO_MATERNO,'')
+      ) text
+  "))
+              ->where('country_id', $request->country_id)
+              ->where('workflow_trabajador.AUD_ALTA', 1)
+              ->where(DB::raw("
+    CONCAT(TRAB_NUM_DOC_IDEN,' ',TRAB_APELLIDO_PATERNO,' ',TRAB_APELLIDO_MATERNO,' ',TRAB_PRIMER_NOMBRE,' ',IFNULL(TRAB_SEGUNDO_NOMBRE,''))
+  "), 'LIKE', '%' . $search . '%')
+              ->get();
+      } else {
+          $result = [];
+      }
