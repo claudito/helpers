@@ -24,3 +24,23 @@ $('body').tooltip({selector: '[data-toggle="tooltip"]'});
           $('td', row).css('background-color', 'yellow');
       }
   }
+
+//Valores CallBack
+ $('td', nRow).removeAttr('data-toggle','tooltip').removeAttr('data-placement','bottom').removeAttr('title','Tooltip on bottom');
+ $('td', nRow).css('background-color', '#FF9800');
+ $('td', nRow).css('color', 'white');
+ $('td', nRow).attr('data-toggle','tooltip').attr('data-placement','bottom').attr('title',`Mensaje`);
+ 
+ //Init
+ initComplete: function(settings, json) {
+ var data = $('#consulta').DataTable().data().length;
+ if( data > 0 ){
+  //
+ }else{
+  //
+ }
+ 
+ }
+ 
+ 
+ 
