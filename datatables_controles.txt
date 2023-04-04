@@ -16,3 +16,11 @@ bProcessing: true,
 
 //ToolTip Datatable
 $('body').tooltip({selector: '[data-toggle="tooltip"]'});
+
+
+//rowCallBack
+  rowCallback: function (row, data){
+      if( data.valor == 1 ){
+          $('td', row).css('background-color', 'yellow');
+      }
+  }
