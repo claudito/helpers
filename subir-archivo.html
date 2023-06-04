@@ -4,7 +4,7 @@ $(document).on('submit','#formulario',function(e){
     var parametros = new FormData(this);
 
     $.ajax({
-      url:"{{ route('tu_ruta') }",
+      url:"{{ route('tu_ruta') }}",
       type:"POST",
       data: parametros,
       dataType:'JSON',
