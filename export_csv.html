@@ -1,22 +1,74 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 
 <script>
         $(document).on('click', '.btn-export', function(e) {
 
-            var table = $('#tbl-lbs').DataTable();
+            var table = $('#consulta').DataTable();
             var data = table.rows().data().toArray();
 
-            // Convertir los datos a formato CSV utilizando papaparse
-            var csv = Papa.unparse(data);
+            // Obtener los nombres de las columnas (cabeceras)
+            var columnNames = [
+                "Id. Seguimiento",
+                "Compañia",
+                "Cliente",
+                "Grupo Calc.",
+                "Responsable",
+                "Dni",
+                "Código",
+                "Trabajador",
+                "Sec. Trab",
+                "Unidad de Negocio",
+                "Cargo",
+                "Sueldo",
+                "N° Scncia",
+                "Fecha de Envio",
+                "Expiración de Firma",
+                "Fecha de Firma Actualización",
+                "Estado",
+                "Tipo",
+                "F. Ini. Actual",
+                "F. Fin Actual",
+                "F. Ini. Contrato",
+                "F. Fin Contrato",
+                "Modelo Contrato",
+                "Motivo de Suplencia",
+                "Nombre de Suplente",
+                "Comentario",
+                "Url"
+            ];
 
-            // Descargar el archivo CSV
-            var blob = new Blob([csv], {
-                type: 'text/csv;charset=utf-8;'
+            // Convertir los datos en una matriz 2D
+            var dataMatrix = [];
+            data.forEach(function(row) {
+                var rowData = [];
+                for (var key in row) {
+                    rowData.push(row[key]);
+                }
+                dataMatrix.push(rowData);
             });
+
+            // Agregar los nombres de las columnas como la primera fila de datos
+            var dataWithHeaders = [columnNames].concat(dataMatrix);
+
+            // Crear un libro de Excel
+            var wb = XLSX.utils.book_new();
+            wb.SheetNames.push("Hoja1");
+
+            // Convertir los datos con cabeceras en una hoja de Excel
+            var ws = XLSX.utils.aoa_to_sheet(dataWithHeaders);
+            wb.Sheets["Hoja1"] = ws;
+
+            // Crear un archivo Excel en base64
+            var excelBase64 = XLSX.write(wb, {
+                bookType: 'xlsx',
+                type: 'base64'
+            });
+
+            // Crear un enlace para descargar el archivo Excel
             var link = document.createElement("a");
-            var url = URL.createObjectURL(blob);
-            link.setAttribute("href", url);
-            link.setAttribute("download", "datos.csv");
+            link.setAttribute("href",
+                "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + excelBase64);
+            link.setAttribute("download", "Reporte Operativo Contratos.xlsx");
             link.style.visibility = 'hidden';
             document.body.appendChild(link);
             link.click();
