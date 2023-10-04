@@ -3,6 +3,16 @@
 <script>
         $(document).on('click', '.btn-export', function(e) {
 
+            // Mostrar un mensaje de carga con SweetAlert
+            Swal.fire({
+                title: 'Generando archivo Excel...',
+                text : 'Espere un momento',
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
             var table = $('#consulta').DataTable();
             var data = table.rows().data().toArray();
 
@@ -64,15 +74,22 @@
                 type: 'base64'
             });
 
-            // Crear un enlace para descargar el archivo Excel
-            var link = document.createElement("a");
-            link.setAttribute("href",
-                "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," + excelBase64);
-            link.setAttribute("download", "Reporte Operativo Contratos.xlsx");
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            // Esperar un breve período de tiempo para que SweetAlert muestre el mensaje de carga
+            setTimeout(function() {
+                // Crear un enlace para descargar el archivo Excel
+                var link = document.createElement("a");
+                link.setAttribute("href",
+                    "data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64," +
+                    excelBase64);
+                link.setAttribute("download", "Reporte Operativo Contratos.xlsx");
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Ocultar el mensaje de carga de SweetAlert
+                Swal.close();
+            }, 1000);
 
             e.preventDefault();
         });
