@@ -13,7 +13,7 @@
 	  	font-size: 12px;
 	}
 
-	.tab-emp{
+	table{
 	  	width:100%;
 	  	text-align: left;
 	  	border-collapse: collapse;
@@ -22,13 +22,13 @@
 	  	padding-left: 40px;
 	}
 
-	.tab-cab{
+	table th{
 	  	padding: 3px;
 	  	border: 1px solid #000;
 	  	background-color: #EE742D;
 	}
 
-	.tab-det{
+	table td{
 		padding: 3px;
 		border: 1px solid #000;
 		/*background-color: #ebfbfa;*/
@@ -39,4 +39,6 @@
 	}
 
 	/*Striped table*/
-	tr:nth-child(even) {background-color: #fbcf9d;}
+	tr:nth-child(even) {
+		background-color: #fbcf9d;
+	}
