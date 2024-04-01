@@ -27,10 +27,10 @@ $('body').tooltip({selector: '[data-toggle="tooltip"]'});
   }
 
 //Valores CallBack
- $('td', nRow).removeAttr('data-toggle','tooltip').removeAttr('data-placement','bottom').removeAttr('title','Tooltip on bottom');
- $('td', nRow).css('background-color', '#FF9800');
- $('td', nRow).css('color', 'white');
- $('td', nRow).attr('data-toggle','tooltip').attr('data-placement','bottom').attr('title',`Mensaje`);
+ $('td', row).removeAttr('data-toggle','tooltip').removeAttr('data-placement','bottom').removeAttr('title','Tooltip on bottom');
+ $('td', row).css('background-color', '#FF9800');
+ $('td', row).css('color', 'white');
+ $('td', row).attr('data-toggle','tooltip').attr('data-placement','bottom').attr('title',`Mensaje`);
  
  //Init
  initComplete: function(settings, json) {
